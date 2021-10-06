@@ -4,9 +4,10 @@ namespace FileAnalyzer
 {
     partial class StatisticsBox : Form
     {
-        public StatisticsBox(IStatistics statistics)
+        public StatisticsBox(IStatistics statistics, string filename)
         {
             InitializeComponent();
+            this.Text = $"\"{filename}\"";
             textBoxLinesCount.Text = statistics.NumberOfLines.ToString();
             textBoxWordsCount.Text = statistics.NumberOfWords.ToString();
             textBoxCharsNoSpaceCount.Text = statistics.NumberOfCharsWithoutSpace.ToString();

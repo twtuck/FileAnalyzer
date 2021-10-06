@@ -5,9 +5,10 @@ namespace FileAnalyzer
 {
     partial class InconsistentRowsBox : Form
     {
-        public InconsistentRowsBox(IEnumerable<InconsistentRow> inconsistentRows)
+        public InconsistentRowsBox(IEnumerable<InconsistentRow> inconsistentRows, string filename)
         {
             InitializeComponent();
+            this.Text = $"Inconsistent Rows - \"{filename}\"";
             foreach (var inconsistentRow in inconsistentRows)
             {
                 listViewInconsistentRows.Items.Add(inconsistentRow.RowId.ToString())

@@ -55,6 +55,11 @@ namespace FileAnalyzer
             linkLabelViewInconsistentRows.Visible = false;
             listViewResults.Items.Clear();
             listViewResults.Columns.Clear();
+            listViewResults.Enabled = false;
+            _listViewItemComparer.SortColumn = 0;
+            _listViewItemComparer.Order = SortOrder.Ascending;
+            _listViewItemComparer.ColumnType = ColumnType.String;
+
         }
 
         /// <summary>
@@ -79,6 +84,7 @@ namespace FileAnalyzer
             buttonBrowse.Enabled = true;
             textBoxInputFile.Enabled = true;
             checkBoxFirstRowHeaders.Enabled = true;
+            listViewResults.Enabled = true;
             linkLabelViewStatistics.Visible = processingResult == ProcessingResult.Complete;
             linkLabelViewInconsistentRows.Visible = _inconsistentRows.Count > 0;
         }
@@ -184,7 +190,14 @@ namespace FileAnalyzer
             if (statistics == null)
                 return;
 
-            var statisticsBox = new StatisticsBox(statistics);
+            var filename = _fileProcessor?.FileName;
+            if (!string.IsNullOrEmpty(filename))
+            {
+                // extract only the filename from the full path
+                filename = Path.GetFileName(filename);
+            }
+
+            var statisticsBox = new StatisticsBox(statistics, filename);
             statisticsBox.ShowDialog();
         }
 
@@ -218,7 +231,14 @@ namespace FileAnalyzer
 
         private void LinkLabelViewInconsistentRows_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var inconsistentRowsBox = new InconsistentRowsBox(_inconsistentRows);
+            var filename = _fileProcessor?.FileName;
+            if (!string.IsNullOrEmpty(filename))
+            {
+                // extract only the filename from the full path
+                filename = Path.GetFileName(filename);
+            }
+
+            var inconsistentRowsBox = new InconsistentRowsBox(_inconsistentRows, filename);
             inconsistentRowsBox.ShowDialog();
         }
 
@@ -240,7 +260,7 @@ namespace FileAnalyzer
                 _listViewItemComparer.Order = SortOrder.Ascending;
             }
 
-            _listViewItemComparer.ColumnType = _columnHeaders[e.Column].Type?? ColumnType.String;
+            _listViewItemComparer.ColumnType = _columnHeaders?[e.Column].Type?? ColumnType.String;
 
             // Perform the sort with these new sort options.
             listViewResults.Sort();
