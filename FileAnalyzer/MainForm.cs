@@ -40,22 +40,26 @@ namespace FileAnalyzer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // resize the controls based on the initial size when the main form is loaded
             ResizeControls();
+
             var progress = new Progress<IStatusUpdate>();
             progress.ProgressChanged += (_, statusUpdate) =>
             {
+                // Update status text and progress bar based on status updates from the file processor
                 labelStatus.Text = string.Format(Properties.Resources.MainForm_Status_Label_Processing, statusUpdate.RowId);
                 progressBar.Value = statusUpdate.ProcessPercentage;
+
+                // Populate the column headers and values into the result list view
                 PopulateListView(statusUpdate.ColumnHeaders, statusUpdate.Values);
             };
             _progress = progress;
         }
 
-        /// <summary>
-        ///  Update UI components before processing starts
-        /// </summary>
-        private void UpdateUIBeforeRun()
+        // Update UI components and initialize local variables before processing starts
+        private void UpdateBeforeRun()
         {
+            // update UI states
             progressBar.Value = 0;
             buttonImport.Text = Properties.Resources.MainForm_Process_Label_Cancel;
             labelStatus.Text = Properties.Resources.MainForm_Status_Label_Running;
@@ -66,17 +70,29 @@ namespace FileAnalyzer
             linkLabelViewInconsistentRows.Visible = false;
             listViewResults.Items.Clear();
             listViewResults.Columns.Clear();
+
+            // clears inconsistent rows and column headers of previous file
+            _inconsistentRows.Clear();
+            _columnHeaders = null;
+
+            // remove the sorting comparer from the result list view, to disable sorting
+            // while the file is processed and the list view is populated
             listViewResults.ListViewItemSorter = null;
+
+            // reset the sorting options
             _listViewItemComparer.Reset();
+
+            // mark the start of processing
             _processing = true;
         }
 
-        /// <summary>
-        /// Update UI components after processing is complete or cancelled
-        /// </summary>
-        private void UpdateUIAfterRun(ProcessingResult processingResult, string errorMessage = null)
+        // Update UI components after processing is complete or cancelled
+        private void UpdateAfterRun(ProcessingResult processingResult, string errorMessage = null)
         {
+            // clear progress bar after processing stops
             progressBar.Value = 0;
+
+            // update UI states
             buttonImport.Text = Properties.Resources.MainForm_Process_Label_Import;
             switch (processingResult)
             {
@@ -95,17 +111,18 @@ namespace FileAnalyzer
             checkBoxFirstRowHeaders.Enabled = true;
             linkLabelViewStatistics.Visible = processingResult == ProcessingResult.Complete;
             linkLabelViewInconsistentRows.Visible = _inconsistentRows.Count > 0;
+
+            // marks end of file processing
             _processing = false;
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
+            // resize the ui controls when the main form is resized
             ResizeControls();
         }
 
-        /// <summary>
-        /// Resize controls to fit the client area
-        /// </summary>
+        // Resize UI controls to fit the client area
         private void ResizeControls()
         {
             listViewResults.Top = 30;
@@ -118,17 +135,19 @@ namespace FileAnalyzer
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // cancel any ongoing processing
+            // cancel any ongoing file processing when the form is closed
             _fileProcessor?.Cancel();
         }
 
         public void NotifyStatus(IStatusUpdate statusUpdate)
         {
+            // pass the status update notification back to the UI thread
             _progress.Report(statusUpdate);
         }
 
         public void NotifyInconsistentRow(InconsistentRow inconsistentRow)
         {
+            // pass the inconsistent row info back to the UI thread
             _inconsistentRows.Add(inconsistentRow);
         }
 
@@ -138,6 +157,7 @@ namespace FileAnalyzer
             var dialogResult = browseInputFileDialog.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
+                // update the input file text box when user confirms a file selection 
                 textBoxInputFile.Text = browseInputFileDialog.FileName;
             }
         }
@@ -146,10 +166,13 @@ namespace FileAnalyzer
         {
             if (buttonImport.Text == Properties.Resources.MainForm_Process_Label_Import)
             {
+                // start importing asynchronously
                 await DoImport();
             }
             else
             {
+                // the button is currently in Cancel mode (i.e. a file processing) is running
+                // clicking on this button now indicates the intention to cancel the current processing
                 _fileProcessor?.Cancel();
             }
         }
@@ -172,33 +195,32 @@ namespace FileAnalyzer
                     return;
                 }
 
-                UpdateUIBeforeRun();
-                _inconsistentRows.Clear();
-                _columnHeaders = null;
+                UpdateBeforeRun();
 
-                // Cancel any processing currently running
+                // Cancel any ongoing file processing
                 _fileProcessor?.Cancel();
 
-                // Initial a new processor and start processing the specified input file
+                // Retrieve a file processor and start processing the specified input file
                 _fileProcessor = FileProcessorFactory.GetFileProcessor(textBoxInputFile.Text);
                 var processingResult = await _fileProcessor.Start(this, checkBoxFirstRowHeaders.Checked);
 
-                UpdateUIAfterRun(processingResult);
+                UpdateAfterRun(processingResult);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, @"Input file error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                UpdateUIAfterRun(ProcessingResult.Failed, ex.Message);
-                return;
+                UpdateAfterRun(ProcessingResult.Failed, ex.Message);
             }
         }
 
         private void LinkLabelViewStatistics_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            // nothing to show if file processor or statistics is not available
             var statistics = _fileProcessor?.Statistics;
             if (statistics == null)
                 return;
 
+            // gets the full path of the file processed by the file processor
             var filename = _fileProcessor?.FilePath;
             if (!string.IsNullOrEmpty(filename))
             {
@@ -206,17 +228,22 @@ namespace FileAnalyzer
                 filename = Path.GetFileName(filename);
             }
 
+            // initialize and launch the statistics dialog box
             var statisticsBox = new StatisticsBox(statistics, filename);
             statisticsBox.ShowDialog();
         }
 
+        // populates the result list view with column headers and values
         private void PopulateListView(ColumnHeader[] columnHeaders, string[] values)
         {
             if (listViewResults.Columns.Count == 0 && columnHeaders != null)
             {
+                // new column headers info are supplied and 
+                // the column headers in the result list view is not yet populated
                 _columnHeaders = columnHeaders;
                 var stringBuilder = new StringBuilder();
 
+                // insert the column headers into the result list view and generate a summary description of the column types
                 foreach (var columnHeader in columnHeaders)
                 {
                     listViewResults.Columns.Add(columnHeader.Name, 150);
@@ -229,6 +256,7 @@ namespace FileAnalyzer
 
             if (values?.Length > 0)
             {
+                // row values are supplied, so insert the values as a new row in the result list view
                 var item = listViewResults.Items.Add(values[0]);
                 item.ToolTipText = _columnDataTypes;
                 if (values.Length > 1)
@@ -240,6 +268,7 @@ namespace FileAnalyzer
 
         private void LinkLabelViewInconsistentRows_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            // gets the full path of the file processed by the file processor
             var filename = _fileProcessor?.FilePath;
             if (!string.IsNullOrEmpty(filename))
             {
@@ -247,18 +276,23 @@ namespace FileAnalyzer
                 filename = Path.GetFileName(filename);
             }
 
+            // initialize and launch the inconsistent rows dialog box
             var inconsistentRowsBox = new InconsistentRowsBox(_inconsistentRows, filename);
             inconsistentRowsBox.ShowDialog();
         }
 
         private void ListViewResults_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if (_processing) return;
+            if (_processing)
+            {
+                // file processing in ongoing, do not allow column sorting
+                return;
+            }
 
-            // Determine if clicked column is already the column that is being sorted.
+            // check if clicked column is already sorted
             if (e.Column == _listViewItemComparer.SortColumn)
             {
-                // Reverse the current sort direction for this column.
+                // reverse the sort order of the clicked column
                 _listViewItemComparer.Order = 
                     _listViewItemComparer.Order == SortOrder.Ascending ? 
                         SortOrder.Descending : 
@@ -266,15 +300,19 @@ namespace FileAnalyzer
             }
             else
             {
-                // Set the column number that is to be sorted; default to ascending.
+                // a different column is clicked, so set the current column index as
+                // the column number to be sorted and default the sort order to ascending
                 _listViewItemComparer.SortColumn = e.Column;
                 _listViewItemComparer.Order = SortOrder.Ascending;
             }
 
+            // specify the type of the column to be sorted, assume the column is string if column type info is not available
             _listViewItemComparer.ColumnType = _columnHeaders?[e.Column].Type?? ColumnType.String;
 
-            // Perform the sort with these new sort options.
+            // assign the comparer to the result list view
             listViewResults.ListViewItemSorter = _listViewItemComparer;
+
+            // perform the sort with the updated sort options
             listViewResults.Sort();
         }
     }
