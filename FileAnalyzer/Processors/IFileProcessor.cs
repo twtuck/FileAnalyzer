@@ -23,7 +23,7 @@ namespace FileAnalyzer
         /// <summary>
         /// Returns the full path of the file being processed by the file processor
         /// </summary>
-        string FileName { get; }
+        string FilePath { get; }
 
         /// <summary>
         /// Returns the statistics of the file processed

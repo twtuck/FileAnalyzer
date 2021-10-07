@@ -8,7 +8,7 @@ namespace FileAnalyzer
     /// </summary>
     public class CSVFileProcessor : FileProcessorBase
     {
-        public CSVFileProcessor(string inputFile) : base(inputFile)
+        public CSVFileProcessor(string filePath) : base(filePath)
         {
         }
 

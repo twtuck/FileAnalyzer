@@ -8,7 +8,7 @@ namespace FileAnalyzer
     /// </summary>
     public class TSVFileProcessor : FileProcessorBase
     {
-        public TSVFileProcessor(string inputFile) : base(inputFile)
+        public TSVFileProcessor(string filePath) : base(filePath)
         {
         }
 

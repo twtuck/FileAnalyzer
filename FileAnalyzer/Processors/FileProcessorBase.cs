@@ -20,19 +20,20 @@ namespace FileAnalyzer
         // Keeps the information of the column headers
         protected ColumnHeader[] ColumnHeaders;
 
-        public string FileName { get; }
+        // The full path of the file being processed
+        public string FilePath { get; }
 
         // Exposes the interface to access the statistics
         public IStatistics Statistics => InternalStatistics;
 
         protected abstract char Separator { get; }
 
-        protected FileProcessorBase(string inputFile)
+        protected FileProcessorBase(string filePath)
         {
-            var inputFileInfo = new FileInfo(inputFile);
+            var inputFileInfo = new FileInfo(filePath);
             if (!inputFileInfo.Exists)
-                throw new Exception($"File '{inputFile}' does not exist");
-            FileName = inputFile;
+                throw new Exception($"File '{filePath}' does not exist");
+            FilePath = filePath;
             CompletionTracker = new CompletionTracker(inputFileInfo.Length);
         }
 
@@ -41,7 +42,7 @@ namespace FileAnalyzer
             var rowId = 0;
             var firstNonEmptyRowFound = false;
 
-            using (var fileStream = new FileStream(FileName, FileMode.Open, FileAccess.Read))
+            using (var fileStream = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
             using (var streamReader = new StreamReader(fileStream))
             {
                 while (true)

@@ -154,7 +154,7 @@ namespace FileAnalyzer
 
         private async Task DoImport()
         {
-            // check if a file name has been specified
+            // check if an input file has been specified
             if (string.IsNullOrEmpty(textBoxInputFile.Text))
             {
                 MessageBox.Show(@"Please specify a CSV file to import", @"File not specified", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -163,7 +163,7 @@ namespace FileAnalyzer
 
             try
             {
-                // check if the specified file constitutes of a file name
+                // check if the specified file path constitutes of a file name
                 if (string.IsNullOrEmpty(Path.GetFileName(textBoxInputFile.Text)))
                 {
                     MessageBox.Show(@"Please specify a valid file path", @"Invalid file name", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -197,7 +197,7 @@ namespace FileAnalyzer
             if (statistics == null)
                 return;
 
-            var filename = _fileProcessor?.FileName;
+            var filename = _fileProcessor?.FilePath;
             if (!string.IsNullOrEmpty(filename))
             {
                 // extract only the filename from the full path
@@ -238,7 +238,7 @@ namespace FileAnalyzer
 
         private void LinkLabelViewInconsistentRows_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var filename = _fileProcessor?.FileName;
+            var filename = _fileProcessor?.FilePath;
             if (!string.IsNullOrEmpty(filename))
             {
                 // extract only the filename from the full path
