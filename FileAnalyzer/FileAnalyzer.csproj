@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="Comparers\ListViewItemComparer.cs" />
     <Compile Include="Processors\ColumnType.cs" />
+    <Compile Include="Processors\FileType.cs" />
     <Compile Include="Processors\InconsistentRowException.cs" />
     <Compile Include="Processors\TSVFileProcessor.cs" />
     <Compile Include="Processors\FileProcessorFactory.cs" />

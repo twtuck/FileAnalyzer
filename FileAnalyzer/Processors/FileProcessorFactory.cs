@@ -3,12 +3,9 @@ using System.IO;
 
 namespace FileAnalyzer
 {
-    public enum FileType
-    {
-        CSV,
-        TSV
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public static class FileProcessorFactory
     {
         public static IFileProcessor GetFileProcessor(string inputFile, FileType? fileType = null)
