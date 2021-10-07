@@ -17,14 +17,12 @@ namespace FileAnalyzer
         private readonly List<InconsistentRow> _inconsistentRows = new List<InconsistentRow>();
         private ColumnHeader[] _columnHeaders;
         private string _toolTipText;
-        private readonly ListViewItemComparer _listViewItemComparer;
+        private readonly ListViewItemComparer _listViewItemComparer = new ListViewItemComparer();
 
         public MainForm()
         {
             InitializeComponent();
             listViewResults.DoubleBuffered(true);
-            _listViewItemComparer = new ListViewItemComparer();
-            listViewResults.ListViewItemSorter = _listViewItemComparer;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -56,10 +54,7 @@ namespace FileAnalyzer
             listViewResults.Items.Clear();
             listViewResults.Columns.Clear();
             listViewResults.Enabled = false;
-            _listViewItemComparer.SortColumn = 0;
-            _listViewItemComparer.Order = SortOrder.Ascending;
-            _listViewItemComparer.ColumnType = ColumnType.String;
-
+            listViewResults.ListViewItemSorter = null;
         }
 
         /// <summary>
@@ -84,9 +79,11 @@ namespace FileAnalyzer
             buttonBrowse.Enabled = true;
             textBoxInputFile.Enabled = true;
             checkBoxFirstRowHeaders.Enabled = true;
-            listViewResults.Enabled = true;
             linkLabelViewStatistics.Visible = processingResult == ProcessingResult.Complete;
             linkLabelViewInconsistentRows.Visible = _inconsistentRows.Count > 0;
+
+            _listViewItemComparer.Reset();
+            listViewResults.Enabled = true;
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
@@ -263,6 +260,7 @@ namespace FileAnalyzer
             _listViewItemComparer.ColumnType = _columnHeaders?[e.Column].Type?? ColumnType.String;
 
             // Perform the sort with these new sort options.
+            listViewResults.ListViewItemSorter = _listViewItemComparer;
             listViewResults.Sort();
         }
     }

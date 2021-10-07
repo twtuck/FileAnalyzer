@@ -28,6 +28,13 @@ namespace FileAnalyzer
             _defaultComparer = new CaseInsensitiveComparer();
         }
 
+        public void Reset()
+        {
+            SortColumn = 0;
+            Order = SortOrder.None;
+            ColumnType = ColumnType.String;
+        }
+
         // The result of the comparison.
         // 0 if x = y, positive if x > y,  negative if x < y
         public int Compare(object x, object y)

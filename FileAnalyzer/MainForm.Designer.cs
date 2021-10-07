@@ -126,6 +126,8 @@ namespace FileAnalyzer
             // checkBoxFirstRowHeaders
             // 
             this.checkBoxFirstRowHeaders.AutoSize = true;
+            this.checkBoxFirstRowHeaders.Checked = true;
+            this.checkBoxFirstRowHeaders.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxFirstRowHeaders.Location = new System.Drawing.Point(863, 10);
             this.checkBoxFirstRowHeaders.Name = "checkBoxFirstRowHeaders";
             this.checkBoxFirstRowHeaders.Size = new System.Drawing.Size(178, 24);
