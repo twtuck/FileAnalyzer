@@ -29,6 +29,9 @@ namespace FileAnalyzer
         // Used by the result list view to sort items by selected column
         private readonly ListViewItemComparer _listViewItemComparer = new ListViewItemComparer();
 
+        // Indicates whether a file processing is in progress
+        private bool _processing;
+
         public MainForm()
         {
             InitializeComponent();
@@ -63,8 +66,9 @@ namespace FileAnalyzer
             linkLabelViewInconsistentRows.Visible = false;
             listViewResults.Items.Clear();
             listViewResults.Columns.Clear();
-            listViewResults.Enabled = false;
             listViewResults.ListViewItemSorter = null;
+            _listViewItemComparer.Reset();
+            _processing = true;
         }
 
         /// <summary>
@@ -91,9 +95,7 @@ namespace FileAnalyzer
             checkBoxFirstRowHeaders.Enabled = true;
             linkLabelViewStatistics.Visible = processingResult == ProcessingResult.Complete;
             linkLabelViewInconsistentRows.Visible = _inconsistentRows.Count > 0;
-
-            _listViewItemComparer.Reset();
-            listViewResults.Enabled = true;
+            _processing = false;
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
@@ -251,6 +253,8 @@ namespace FileAnalyzer
 
         private void ListViewResults_ColumnClick(object sender, ColumnClickEventArgs e)
         {
+            if (_processing) return;
+
             // Determine if clicked column is already the column that is being sorted.
             if (e.Column == _listViewItemComparer.SortColumn)
             {

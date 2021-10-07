@@ -26,6 +26,7 @@ namespace FileAnalyzer
         // Exposes the interface to access the statistics
         public IStatistics Statistics => InternalStatistics;
 
+        // The separator character that separates a line into multiple values
         protected abstract char Separator { get; }
 
         protected FileProcessorBase(string filePath)
@@ -34,6 +35,8 @@ namespace FileAnalyzer
             if (!inputFileInfo.Exists)
                 throw new Exception($"File '{filePath}' does not exist");
             FilePath = filePath;
+
+            // initialize the completion tracker with the target file size
             CompletionTracker = new CompletionTracker(inputFileInfo.Length);
         }
 
@@ -42,12 +45,15 @@ namespace FileAnalyzer
             var rowId = 0;
             var firstNonEmptyRowFound = false;
 
+            // open the file stream to read in line by line
             using (var fileStream = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
             using (var streamReader = new StreamReader(fileStream))
             {
                 while (true)
                 {
-                    if (cancellationToken.WaitHandle.WaitOne(50))
+                    // allow the thread to sleep for an arbitrary amount of time in each loop, to avoid the
+                    // hogging the CPU when processing a large file (to avoid an non-responsive UI)
+                    if (cancellationToken.WaitHandle.WaitOne(2))
                     {
                         // cancel triggered by user
                         notification?.NotifyStatus(new StatusUpdate { RowId = rowId, ProcessPercentage = 0 });
@@ -124,7 +130,7 @@ namespace FileAnalyzer
                 return (2, null);
 
             var values = line.Split(Separator);
-            if (values.Length != ColumnHeaders.Length)
+            if (ColumnHeaders != null && values.Length != ColumnHeaders.Length)
             {
                 throw new InconsistentRowException();
             }
