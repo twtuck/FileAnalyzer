@@ -1,0 +1,54 @@
+﻿Region,Device Type,Firmware,Configuration,Total,Date/Time,Active
+03 Erbil Shadi Area,EDMI GW30,GW30V434A041,MA-001,1,1/10/2021 20:00,TRUE
+07 Erbil Park  Ankawa Kori  Shorsh Area,EDMI Mk32H,V274A320,EA-004,11740,1/10/2021 20:15,TRUE
+08 Erbil Nusaran Gulan Bakur Perzin Baherka Area,EDMI GW30,V435A006,MA-001,1063,1/10/2021 20:30,TRUE
+08 Erbil Nusaran Gulan Bakur Perzin Baherka Area,EDMI Mk32H,V274A320,EA-004,10451,1/10/2021 20:45,TRUE
+09 Erbil Rozhhalat Qalat Area,EDMI Mk32H,V274A320,EA-004,11711,1/10/2021 21:00,TRUE
+10 Suli Bakrajo  Zanko USA Bardaka F78 Area,EDMI GW30,Unknown,MA-001,19,1/10/2021 21:15,TRUE
+10 Suli Bakrajo  Zanko USA Bardaka F78 Area,EDMI Mk10M,Old Firmware,HXE110 (Default),187,1/10/2021 21:30,TRUE
+10 Suli Bakrajo  Zanko USA Bardaka F78 Area,EDMI Mk32H,V254A187,EDMI GW32P (Default),38,1/10/2021 21:45,TRUE
+11 Suli Raparin Nishtiman Halgwrd Qularaisy Area,EDMI Mk32H,V254A187,EA-002,330,1/10/2021 22:00,TRUE
+11 Suli Raparin Nishtiman Halgwrd Qularaisy Area,EDMI Mk32H,V254A187,EA-004,1,1/10/2021 22:15,FALSE
+11 Suli Raparin Nishtiman Halgwrd Qularaisy Area,EDMI Mk32H,V274A320,EA-004,14404,1/10/2021 22:30,FALSE
+12 Suli Shaheed Shari Jwan Bardaka Zargata Area,EDMI Mk10E,1.64,EF-005,362,1/10/2021 22:45,FALSE
+12 Suli Shaheed Shari Jwan Bardaka Zargata Area,EDMI Mk32H,254,EA-002,10,1/10/2021 23:00,TRUE
+13 Suli SarchnarTavga F377 385 Area,EDMI GW30,GW30V434S033,MA-001,1,1/10/2021 23:15,FALSE
+13 Suli SarchnarTavga F377 385 Area,EDMI GW30,V434A041,MA-001,5,1/10/2021 23:30,TRUE
+13 Suli SarchnarTavga F377 385 Area,EDMI Mk32H,V254A187,EA-002,257,1/10/2021 23:45,TRUE
+13 Suli SarchnarTavga F377 385 Area,EDMI Mk32H,V254A187,EA-004,2,2/10/2021 0:00,TRUE
+13 Suli SarchnarTavga F377 385 Area,EDMI Mk32H,V274A320,EA-002,2398,2/10/2021 0:15,TRUE
+13 Suli SarchnarTavga F377 385 Area,EDMI Mk32H,V274A320,EA-004,14121,2/10/2021 0:30,TRUE
+14 Suli Hawari Shar Kurdsat Tavga Area,EDMI Mk32H,Unknown,EDMI GW32P (Default),84,2/10/2021 0:45,TRUE
+15 Duhok Nizare  Etit  East Area,EDMI Mk32H,Unknown,EDMI GW32P (Default),95,2/10/2021 1:00,FALSE
+16 Duhok Zozan Azadi Segrka West Duhok Shindokha Area,EDMI Mk10E,Unknown,EF-001,17,2/10/2021 1:15,FALSE
+16 Duhok Zozan Azadi Segrka West Duhok Shindokha Area,EDMI Mk32H,V254A192,EA-002,46,2/10/2021 1:30,FALSE
+17 Duhok Malta Maseek  Shakhki  Tanahi Area,EDMI GW30,V435A006,MA-001,2203,2/10/2021 1:45,FALSE
+17 Duhok Malta Maseek  Shakhki  Tanahi Area,EDMI Mk10M,Old Firmware,HXE110 (Default),2319,2/10/2021 2:00,FALSE
+18 Garmiyan Shahidan  Kalar Area,EDMI Mk10M,10M Firmware 106_0182120004,HXE110 (Default),1,2/10/2021 2:15,FALSE
+Erbil Industrial Area,EDMI GW30,GW30V334A035,MA-001,1,2/10/2021 2:30,FALSE
+Erbil Industrial Area,EDMI GW30,GW30V434A038,MA-001,3,2/10/2021 2:45,FALSE
+Erbil Industrial Area,EDMI Mk10M,Old Firmware,HXE110 (Default),1393,2/10/2021 3:00,FALSE
+Erbil Industrial Area,EDMI Mk32H,V254A187,EDMI GW32P (Default),24,2/10/2021 3:15,TRUE
+Garmiyan Area,EDMI GW30,GW30V434A041,MA-001,6,2/10/2021 3:30,TRUE
+Garmiyan Area,EDMI Mk10E,1.64,EF-005,617,2/10/2021 3:45,TRUE
+Garmiyan Area,EDMI Mk10E,Unknown,EF-001,48,2/10/2021 4:00,TRUE
+Garmiyan Area,EDMI Mk32H,254,EA-004,2,2/10/2021 4:15,TRUE
+03 Erbil Shadi Area,EDMI GW30,V435A006,MA-001,524,2/10/2021 4:30,TRUE
+03 Erbil Shadi Area,EDMI GW30,V435A007,MA-001,17,2/10/2021 4:45,TRUE
+03 Erbil Shadi Area,EDMI Mk32H,254,EA-002,24,2/10/2021 5:00,TRUE
+03 Erbil Shadi Area,EDMI Mk32H,V254A187,EA-004,2,2/10/2021 5:15,TRUE
+03 Erbil Shadi Area,EDMI Mk32H,V274A322,EA-002,1,2/10/2021 5:30,TRUE
+03 Erbil Shadi Area,EDMI Mk32H,V274A322,EA-004,237,2/10/2021 5:45,TRUE
+04 Erbil Azadi and Bashur Area,EDMI GW30,GW30V434A040,MA-001,1,2/10/2021 6:00,TRUE
+04 Erbil Azadi and Bashur Area,EDMI GW30,Unknown,MA-001,15,2/10/2021 6:15,FALSE
+04 Erbil Azadi and Bashur Area,EDMI Mk10E,Unknown,EF-005,1,2/10/2021 6:30,FALSE
+05 Erbil Naseej Gilkand Nowroz Area,EDMI Mk10M,Old Firmware,HXE110 (Default),848,2/10/2021 6:45,TRUE
+05 Erbil Naseej Gilkand Nowroz Area,EDMI Mk32H,V254A187,EDMI GW32P (Default),55,2/10/2021 7:00,TRUE
+06 Erbil Rozhawa Turaq  Nishtiman Sarbasti Area,EDMI Mk10M,10M Firmware 106_0182120004,HXE110 (Default),1,2/10/2021 7:15,TRUE
+06 Erbil Rozhawa Turaq  Nishtiman Sarbasti Area,EDMI Mk10M,Old Firmware,HXE110 (Default),1530,2/10/2021 7:30,FALSE
+06 Erbil Rozhawa Turaq  Nishtiman Sarbasti Area,EDMI Mk32H,V254A187,EDMI GW32P (Default),24,2/10/2021 7:45,TRUE
+07 Erbil Park  Ankawa Kori  Shorsh Area,EDMI GW30,V435A006,MA-001,1492,2/10/2021 8:00,TRUE
+07 Erbil Park  Ankawa Kori  Shorsh Area,EDMI Mk32H,254,EDMI GW32P (Default),5,2/10/2021 8:15,TRUE
+07 Erbil Park  Ankawa Kori  Shorsh Area,EDMI Mk32H,Unknown,EDMI GW32P (Default),83,2/10/2021 8:30,TRUE
+08 Erbil Nusaran Gulan Bakur Perzin Baherka Area,EDMI Mk32H,V274A320,EA-002,829,2/10/2021 8:45,TRUE
+09 Erbil Rozhhalat Qalat Area,EDMI Mk32H,V254A187,EA-002,449,2/10/2021 9:00,FALSE
