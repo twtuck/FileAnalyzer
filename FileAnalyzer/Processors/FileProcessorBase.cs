@@ -168,14 +168,6 @@ namespace FileAnalyzer
 
     }
 
-    public enum ColumnType
-    {
-        String,
-        Boolean,
-        Numeric,
-        DateTime
-    }
-
     public static class ValueTypes
     {
         public static ColumnType GetType(string value)
