@@ -57,7 +57,7 @@ namespace FileAnalyzer
                     if (line == null)
                     {
                         // no more line to read
-                        notification?.NotifyStatus(new StatusUpdate { RowId = rowId, ProcessPercentage = 100 });
+                        notification?.NotifyStatus(new StatusUpdate { RowId = rowId, ProcessPercentage = 100, ColumnHeaders = ColumnHeaders });
                         return ProcessingResult.Complete;
                     }
 
@@ -79,9 +79,9 @@ namespace FileAnalyzer
                             }
                         }
 
-                        var (lineLength, values, columnHeaders) = ProcessValues(line);
+                        var (lineLength, values) = ProcessValues(line);
                         CompletionTracker.UpdateCompletion(lineLength);
-                        notification?.NotifyStatus(new StatusUpdate { RowId = rowId, ProcessPercentage = CompletionTracker.CurrentPercentage, Values = values, ColumnHeaders = columnHeaders });
+                        notification?.NotifyStatus(new StatusUpdate { RowId = rowId, ProcessPercentage = CompletionTracker.CurrentPercentage, Values = values, ColumnHeaders = ColumnHeaders });
                     }
                     catch (IndexOutOfRangeException)
                     {
@@ -106,12 +106,16 @@ namespace FileAnalyzer
             return line.Length + 2; // assume the line ends with CR/LF
         }
 
-
-        private (int lineLength, string[] values, ColumnHeader[] columnHeaders) ProcessValues(string line)
+        /// <summary>
+        /// Split the given line with the configured separator
+        /// </summary>
+        /// <param name="line">The line to be processed</param>
+        /// <returns>the length of the line and the split values</returns>
+        private (int lineLength, string[] values) ProcessValues(string line)
         {
             InternalStatistics.NumberOfLines++;
             if (string.IsNullOrWhiteSpace(line))
-                return (2, null, null);
+                return (2, null);
 
             var values = line.Split(Separator);
 
@@ -140,7 +144,7 @@ namespace FileAnalyzer
             }
 
             // assume each line ends with CR/LF
-            return (lineLength: line.Length + 2, values, ColumnHeaders); 
+            return (lineLength: line.Length + 2, values); 
         }
 
         public async Task<ProcessingResult> Start(INotification notification, bool firstRowIsHeaders)

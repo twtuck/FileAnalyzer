@@ -177,7 +177,7 @@ namespace FileAnalyzer
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MinimumSize = new System.Drawing.Size(1192, 739);
             this.Name = "MainForm";
-            this.Text = "File Analyzer";
+            this.Text = "File Analyzer - CSV/TSV";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
