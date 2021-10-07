@@ -1,5 +1,8 @@
 ﻿namespace FileAnalyzer
 {
+    /// <summary>
+    /// Exposes the interface to access the line, word and character counts of a processed file
+    /// </summary>
     public interface IStatistics
     {
         int NumberOfLines { get; }

@@ -4,10 +4,17 @@ using System.IO;
 namespace FileAnalyzer
 {
     /// <summary>
-    /// 
+    /// Used to supply a file processor based on the extension of the specified file
     /// </summary>
     public static class FileProcessorFactory
     {
+        /// <summary>
+        /// Supply a file processor based on the extension of the specified file.
+        /// 
+        /// </summary>
+        /// <param name="inputFile">The full path of the file to be processed</param>
+        /// <param name="fileType">If specified, a file processor of the specified type will be return. Otherwise, a file processor based on the file extension will be returned. (TSV processor for .tsv, CSV processor for any other extensions)</param>
+        /// <returns>Returns an interface to a concrete file processor</returns>
         public static IFileProcessor GetFileProcessor(string inputFile, FileType? fileType = null)
         {
             if (fileType == null)

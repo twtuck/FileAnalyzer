@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -12,11 +11,22 @@ namespace FileAnalyzer
 {
     public partial class MainForm : Form, INotification
     {
+        // Used to process the selected file
         private IFileProcessor _fileProcessor;
+
+        // Used to pass status updates to the UI thread
         private IProgress<IStatusUpdate> _progress;
+
+        // Store a list of row values that consists of different number of columns vs the detected column headers
         private readonly List<InconsistentRow> _inconsistentRows = new List<InconsistentRow>();
+
+        // Store the column headers detected from the import file
         private ColumnHeader[] _columnHeaders;
-        private string _toolTipText;
+
+        // Store a combined description of the data type for each column
+        private string _columnDataTypes;
+
+        // Used by the result list view to sort items by selected column
         private readonly ListViewItemComparer _listViewItemComparer = new ListViewItemComparer();
 
         public MainForm()
@@ -212,13 +222,13 @@ namespace FileAnalyzer
                     stringBuilder.AppendLine();
                 }
 
-                _toolTipText = stringBuilder.ToString();
+                _columnDataTypes = stringBuilder.ToString();
             }
 
             if (values?.Length > 0)
             {
                 var item = listViewResults.Items.Add(values[0]);
-                item.ToolTipText = _toolTipText;
+                item.ToolTipText = _columnDataTypes;
                 if (values.Length > 1)
                 {
                     item.SubItems.AddRange(values.Skip(1).ToArray());

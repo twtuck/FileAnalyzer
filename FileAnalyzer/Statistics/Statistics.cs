@@ -1,5 +1,8 @@
 ﻿namespace FileAnalyzer
 {
+    /// <summary>
+    /// Stores the line, word and character counts of a processed file
+    /// </summary>
     public class Statistics : IStatistics
     {
         public int NumberOfLines { get; set; }
