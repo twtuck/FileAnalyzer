@@ -83,8 +83,13 @@ namespace FileAnalyzer
                         CompletionTracker.UpdateCompletion(lineLength);
                         notification?.NotifyStatus(new StatusUpdate { RowId = rowId, ProcessPercentage = CompletionTracker.CurrentPercentage, Values = values, ColumnHeaders = ColumnHeaders });
                     }
-                    catch (IndexOutOfRangeException)
+                    catch (Exception ex)
                     {
+                        if (!(ex is IndexOutOfRangeException) && !(ex is InconsistentRowException))
+                        {
+                            throw;
+                        }
+
                         notification?.NotifyInconsistentRow(new InconsistentRow(rowId, line));
                     }
                 }
@@ -118,6 +123,10 @@ namespace FileAnalyzer
                 return (2, null);
 
             var values = line.Split(Separator);
+            if (values.Length != ColumnHeaders.Length)
+            {
+                throw new InconsistentRowException();
+            }
 
             if (values.Length > 0)
             {

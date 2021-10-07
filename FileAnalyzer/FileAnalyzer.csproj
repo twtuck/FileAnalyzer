@@ -60,6 +60,7 @@
       <DependentUpon>StatisticsBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Comparers\ListViewItemComparer.cs" />
+    <Compile Include="Processors\InconsistentRowException.cs" />
     <Compile Include="Processors\TSVFileProcessor.cs" />
     <Compile Include="Processors\FileProcessorFactory.cs" />
     <Compile Include="Processors\ColumnHeader.cs" />
