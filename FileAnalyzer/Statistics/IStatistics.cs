@@ -1,4 +1,6 @@
-﻿namespace FileAnalyzer
+﻿using System;
+
+namespace FileAnalyzer
 {
     /// <summary>
     /// Exposes the interface to access the line, word and character counts of a processed file
@@ -9,5 +11,6 @@
         int NumberOfWords { get; }
         int NumberOfCharsWithSpace { get; }
         int NumberOfCharsWithoutSpace { get; }
+        TimeSpan ProcessingTime { get; } 
     }
 }

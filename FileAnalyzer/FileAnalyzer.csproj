@@ -66,6 +66,7 @@
     <Compile Include="Processors\TSVFileProcessor.cs" />
     <Compile Include="Processors\FileProcessorFactory.cs" />
     <Compile Include="Processors\ColumnHeader.cs" />
+    <Compile Include="Processors\ValueTypes.cs" />
     <Compile Include="StatusUpdates\InconsistentRow.cs" />
     <Compile Include="Processors\ProcessingResult.cs" />
     <Compile Include="Processors\CompletionTracker.cs" />

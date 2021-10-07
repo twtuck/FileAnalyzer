@@ -12,6 +12,7 @@ namespace FileAnalyzer
             textBoxWordsCount.Text = $@"{statistics.NumberOfWords:n0}"; 
             textBoxCharsNoSpaceCount.Text = $@"{statistics.NumberOfCharsWithoutSpace:n0}";
             textBoxCharsWithSpaceCount.Text = $@"{statistics.NumberOfCharsWithSpace:n0}";
+            textBoxProcessingTime.Text = statistics.ProcessingTime.ToString(@"hh\:mm\:ss\.fff");
         }
     }
 }
