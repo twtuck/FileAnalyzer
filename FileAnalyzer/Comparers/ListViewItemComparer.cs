@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FileAnalyzer
@@ -35,10 +34,11 @@ namespace FileAnalyzer
             ColumnType = ColumnType.String;
         }
 
-        // The result of the comparison.
+        // The result of the comparison between x & y.
         // 0 if x = y, positive if x > y,  negative if x < y
         public int Compare(object x, object y)
         {
+            // cast x, y to ListViewItem and extract the corresponding subitem values from the column to be sorted
             var xValue = (x as ListViewItem)?.SubItems[SortColumn].Text;
             var yValue = (y as ListViewItem)?.SubItems[SortColumn].Text;
 
@@ -55,6 +55,8 @@ namespace FileAnalyzer
                     compareResult = CompareAsString(xValue, yValue);
                     break;
             }
+
+            // negate the comparison result if the column is to be sorted in descending order
             return Order == SortOrder.Descending? -compareResult : compareResult;
         }
 
@@ -67,8 +69,8 @@ namespace FileAnalyzer
         {
             try
             {
-                var firstValue = double.Parse(x as string);
-                var secondValue = double.Parse(y as string);
+                var firstValue = double.Parse(x);
+                var secondValue = double.Parse(y);
                 return (int)(firstValue - secondValue);
             }
             catch
@@ -82,8 +84,8 @@ namespace FileAnalyzer
         {
             try
             {
-                var firstDate = DateTime.Parse(x as string);
-                var secondDate = DateTime.Parse(y as string);
+                var firstDate = DateTime.Parse(x);
+                var secondDate = DateTime.Parse(y);
                 return DateTime.Compare(firstDate, secondDate);
             }
             catch
