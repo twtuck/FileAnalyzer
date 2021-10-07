@@ -8,10 +8,10 @@ namespace FileAnalyzer
         {
             InitializeComponent();
             this.Text = $"\"{filename}\"";
-            textBoxLinesCount.Text = statistics.NumberOfLines.ToString();
-            textBoxWordsCount.Text = statistics.NumberOfWords.ToString();
-            textBoxCharsNoSpaceCount.Text = statistics.NumberOfCharsWithoutSpace.ToString();
-            textBoxCharsWithSpaceCount.Text = statistics.NumberOfCharsWithSpace.ToString();
+            textBoxLinesCount.Text = $@"{statistics.NumberOfLines:n0}"; 
+            textBoxWordsCount.Text = $@"{statistics.NumberOfWords:n0}"; 
+            textBoxCharsNoSpaceCount.Text = $@"{statistics.NumberOfCharsWithoutSpace:n0}";
+            textBoxCharsWithSpaceCount.Text = $@"{statistics.NumberOfCharsWithSpace:n0}";
         }
     }
 }
