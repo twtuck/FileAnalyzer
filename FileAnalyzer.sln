@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileAnalyzer", "FileAnalyze
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessors", "FileProcessors\FileProcessors.csproj", "{7629530F-7058-40C5-9CCB-FF5BD0133717}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessorsTests", "FileProcessorsTests\FileProcessorsTests.csproj", "{FAA13F7C-F823-442E-876A-EBEAC42448E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7629530F-7058-40C5-9CCB-FF5BD0133717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7629530F-7058-40C5-9CCB-FF5BD0133717}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7629530F-7058-40C5-9CCB-FF5BD0133717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA13F7C-F823-442E-876A-EBEAC42448E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA13F7C-F823-442E-876A-EBEAC42448E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA13F7C-F823-442E-876A-EBEAC42448E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA13F7C-F823-442E-876A-EBEAC42448E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

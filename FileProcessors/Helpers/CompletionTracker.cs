@@ -28,6 +28,6 @@
         /// <summary>
         /// Returns the calculated percentage of completion
         /// </summary>
-        public int CurrentPercentage => (int)(_totalCompletedSize * 100 / _targetSize);
+        public int CurrentPercentage => _totalCompletedSize >= _targetSize? 100 : (int)(_totalCompletedSize * 100 / _targetSize);
     }
 }
